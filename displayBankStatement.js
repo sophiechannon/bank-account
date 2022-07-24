@@ -4,7 +4,6 @@ class DisplayBankStatement {
   }
 
   print() {
-    console.log(`date || credit || debit || balance${this._transactionList()}`);
     return `date || credit || debit || balance${this._transactionList()}`;
   }
 
