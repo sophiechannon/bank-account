@@ -44,7 +44,7 @@ describe("transactionHisotory", () => {
     account.withdraw(500);
     expect(account.transactionHistory()).toEqual([
       { date: date, credit: null, debit: 1000, balance: 1000 },
-      { date: date, credit: 500, debit: null, balance: 500 }
+      { date: date, credit: 500, debit: null, balance: 500 },
     ]);
   });
 });

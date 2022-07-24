@@ -3,18 +3,36 @@ class DisplayBankStatement {
     this.transactions = transactions;
   }
 
-  // getTransactions () {
-  //   return this.transactions
-  // }
+  // for testing purposes - to be deleted
+  getTransactions() {
+    return this.transactions;
+  }
 
   print() {
-    if (this.transactions.length === 0) {
-      return "date || credit || debit || balance";
-    } else if (this.transactions.length === 1) {
-      return "date || credit || debit || balance\n23/07/2022 || || 1000.00 || 1000.00";
-    } else {
-      return "date || credit || debit || balance\n23/07/2022 || || 1000.00 || 1000.00\n23/07/2022 || 500.00 || || 500.00";
-    }
+    return `date || credit || debit || balance${this.transactionList()}`;
+  }
+
+  transactionList() {
+    let list = "";
+    this.transactions.forEach((transaction, index) => {
+      list = list.concat(`\n${this.formatDate(transaction.date)} || `);
+      if (transaction.credit != null) {
+        list = list.concat(`${transaction.credit}.00 || `);
+      } else {
+        list = list.concat("|| ");
+      }
+      if (transaction.debit != null) {
+        list = list.concat(`${transaction.debit}.00 || `);
+      } else {
+        list = list.concat("|| ");
+      }
+      list = list.concat(`${transaction.balance}.00`);
+    });
+    return list;
+  }
+
+  formatDate(date) {
+    return date.toLocaleString().split(",")[0];
   }
 }
 
