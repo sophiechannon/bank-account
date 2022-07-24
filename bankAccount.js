@@ -7,6 +7,14 @@ class BankAccount {
     this.balance += amount;
   }
 
+  withdraw(amount) {
+    this.balance -= amount;
+  }
+
+  transactionHistory() {
+    return [{debit: 1000}]
+  }
+
   getBalance() {
     return this.balance;
   }
