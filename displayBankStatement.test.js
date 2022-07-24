@@ -45,21 +45,3 @@ describe("print", () => {
     );
   });
 });
-
-// to be deleted
-
-describe('format pennies', () => {
-  it('formats pennies', () => {
-    const date = new Date("2022-07-23");
-    const accountDouble = {
-      transactionHistory: () => [
-        { date: date, credit: null, debit: 10.5, balance: 10.5 },
-        { date: date, credit: 2.5, debit: null, balance: 8 },
-      ],
-    };
-    const statement = new Statement(accountDouble.transactionHistory());
-    expect(statement._formatPence(10.5)).toEqual("10.50")
-    expect(statement._formatPence(10.62)).toEqual("10.62")
-    expect(statement._formatPence(10)).toEqual("10.00")
-  })
-})
