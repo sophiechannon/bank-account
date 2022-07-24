@@ -7,7 +7,7 @@ describe("print", () => {
     expect(statement.print()).toEqual("date || credit || debit || balance");
   });
   it("prints the header and a line of transactions", () => {
-    date = new Date("2022-07-23");
+    const date = new Date("2022-07-23");
     const accountDouble = {
       transactionHistory: () => [
         { date: date, credit: null, debit: 1000, balance: 1000 },
@@ -19,7 +19,7 @@ describe("print", () => {
     );
   });
   it("prints the header and multiple lines of transactions", () => {
-    date = new Date("2022-07-23");
+    const date = new Date("2022-07-23");
     const accountDouble = {
       transactionHistory: () => [
         { date: date, credit: null, debit: 1000, balance: 1000 },
@@ -31,4 +31,35 @@ describe("print", () => {
       "date || credit || debit || balance\n23/07/2022 || || 1000.00 || 1000.00\n23/07/2022 || 500.00 || || 500.00"
     );
   });
+  it("prints correctly when amounts aren't full pounds, but do end in 0", () => {
+    const date = new Date("2022-07-23");
+    const accountDouble = {
+      transactionHistory: () => [
+        { date: date, credit: null, debit: 10.5, balance: 10.5 },
+        { date: date, credit: 2.5, debit: null, balance: 8 },
+      ],
+    };
+    const statement = new Statement(accountDouble.transactionHistory());
+    expect(statement.print()).toEqual(
+      "date || credit || debit || balance\n23/07/2022 || || 10.50 || 10.50\n23/07/2022 || 2.50 || || 8.00"
+    );
+  });
 });
+
+// to be deleted
+
+describe('format pennies', () => {
+  it('formats pennies', () => {
+    const date = new Date("2022-07-23");
+    const accountDouble = {
+      transactionHistory: () => [
+        { date: date, credit: null, debit: 10.5, balance: 10.5 },
+        { date: date, credit: 2.5, debit: null, balance: 8 },
+      ],
+    };
+    const statement = new Statement(accountDouble.transactionHistory());
+    expect(statement._formatPence(10.5)).toEqual("10.50")
+    expect(statement._formatPence(10.62)).toEqual("10.62")
+    expect(statement._formatPence(10)).toEqual("10.00")
+  })
+})

@@ -16,14 +16,14 @@ class DisplayBankStatement {
         .concat(`\n${this._formatDate(transaction.date)}`)
         .concat(this._formatMoney(transaction.credit))
         .concat(this._formatMoney(transaction.debit))
-        .concat(`${transaction.balance}.00`);
+        .concat(`${this._formatPence(transaction.balance)}`);
     });
     return list;
   }
 
   _formatMoney(amount) {
     if (amount != null) {
-      return `${amount}.00 || `;
+      return `${this._formatPence(amount)} || `;
     } else {
       return "|| ";
     }
@@ -31,6 +31,16 @@ class DisplayBankStatement {
 
   _formatDate(date) {
     return `${date.toLocaleString().split(",")[0]} || `;
+  }
+
+  _formatPence(amount) {
+    if (Number.isInteger(amount)) {
+      return `${amount}.00`
+    } else if (amount.toString().split('.')[1].length === 1) {
+      return `${amount}0`
+    } else {
+      return `${amount}`
+    }
   }
 }
 
