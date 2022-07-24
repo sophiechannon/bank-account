@@ -43,7 +43,7 @@ describe("formatDate", () => {
       ],
     };
     const statement = new Statement(accountDouble.transactionHistory());
-    expect(statement.formatDate(date)).toEqual("23/07/2022");
+    expect(statement._formatDate(date)).toEqual("23/07/2022 || ");
   });
 });
 
@@ -57,7 +57,7 @@ describe("transactionList", () => {
       ],
     };
     const statement = new Statement(accountDouble.transactionHistory());
-    expect(statement.transactionList()).toEqual(
+    expect(statement._transactionList()).toEqual(
       "\n23/07/2022 || || 1000.00 || 1000.00"
     );
   });

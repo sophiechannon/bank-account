@@ -3,36 +3,35 @@ class DisplayBankStatement {
     this.transactions = transactions;
   }
 
-  // for testing purposes - to be deleted
-  getTransactions() {
-    return this.transactions;
-  }
-
   print() {
-    return `date || credit || debit || balance${this.transactionList()}`;
+    console.log(`date || credit || debit || balance${this._transactionList()}`);
+    return `date || credit || debit || balance${this._transactionList()}`;
   }
 
-  transactionList() {
+  // private methods
+
+  _transactionList() {
     let list = "";
     this.transactions.forEach((transaction, index) => {
-      list = list.concat(`\n${this.formatDate(transaction.date)} || `);
-      if (transaction.credit != null) {
-        list = list.concat(`${transaction.credit}.00 || `);
-      } else {
-        list = list.concat("|| ");
-      }
-      if (transaction.debit != null) {
-        list = list.concat(`${transaction.debit}.00 || `);
-      } else {
-        list = list.concat("|| ");
-      }
-      list = list.concat(`${transaction.balance}.00`);
+      list = list
+        .concat(`\n${this._formatDate(transaction.date)}`)
+        .concat(this._formatMoney(transaction.credit))
+        .concat(this._formatMoney(transaction.debit))
+        .concat(`${transaction.balance}.00`);
     });
     return list;
   }
 
-  formatDate(date) {
-    return date.toLocaleString().split(",")[0];
+  _formatMoney(amount) {
+    if (amount != null) {
+      return `${amount}.00 || `;
+    } else {
+      return "|| ";
+    }
+  }
+
+  _formatDate(date) {
+    return `${date.toLocaleString().split(",")[0]} || `;
   }
 }
 
