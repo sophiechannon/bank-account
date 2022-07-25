@@ -24,7 +24,7 @@ class DisplayBankStatement {
   }
 
   _formatMoney(amount) {
-    if (amount != null) {
+    if (amount) {
       return `${formatPence(amount)} || `;
     } else {
       return "|| ";

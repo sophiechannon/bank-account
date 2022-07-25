@@ -27,17 +27,18 @@ date || credit || debit || balance
 Linting (ESList) and tests (Jest) have both been configured to run through NPM.
 
 ````console
-npm use node
+npx use node
 npm init -y
 npm install
 npm run tests
+jest --coverage
 ````
 
 The program runs in node, for example:
 ````node
 node
-const BankAccount = require('./bankAccount);
-const displayBankStatement = require('./displayBankStatement);
+const BankAccount = require('./bankAccount');
+const displayBankStatement = require('./displayBankStatement');
 const account = new BankAccount();
 const statement = new displayBankStatement(BankAccount);
 account.withdraw(1000);
