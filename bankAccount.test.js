@@ -26,7 +26,7 @@ describe("transactionHisotory", () => {
   it("Works for amounts that are not whole pounts", () => {
     const account = new BankAccount();
     const date = new Date();
-    account.deposit(10.50);
+    account.deposit(10.5);
     account.withdraw(2.62);
     expect(account.transactionHistory()).toEqual([
       { date: date, credit: null, debit: 10.5, balance: 10.5 },

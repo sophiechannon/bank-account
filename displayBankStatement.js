@@ -11,7 +11,7 @@ class DisplayBankStatement {
 
   _transactionList() {
     let list = "";
-    this.transactions.forEach((transaction, index) => {
+    this.transactions.forEach((transaction) => {
       list = list
         .concat(`\n${this._formatDate(transaction.date)}`)
         .concat(this._formatMoney(transaction.credit))
@@ -35,11 +35,11 @@ class DisplayBankStatement {
 
   _formatPence(amount) {
     if (Number.isInteger(amount)) {
-      return `${amount}.00`
-    } else if (amount.toString().split('.')[1].length === 1) {
-      return `${amount}0`
+      return `${amount}.00`;
+    } else if (amount.toString().split(".")[1].length === 1) {
+      return `${amount}0`;
     } else {
-      return `${amount}`
+      return `${amount.toFixed(2)}`;
     }
   }
 }

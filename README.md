@@ -11,3 +11,4 @@ Bank account
 
 Edge cases:
 - amounts deposited / withdrawn do not end in .00
+- Can account go overdrawn?
