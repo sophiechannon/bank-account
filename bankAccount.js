@@ -7,7 +7,7 @@ class BankAccount {
   deposit(amount) {
     this.balance += amount;
     this.history.push({
-      date: new Date(),
+      date: new Date(Date.now()),
       credit: null,
       debit: amount,
       balance: this.balance,
@@ -17,7 +17,7 @@ class BankAccount {
   withdraw(amount) {
     this.balance -= amount;
     this.history.push({
-      date: new Date(),
+      date: new Date(Date.now()),
       credit: amount,
       debit: null,
       balance: this.balance,

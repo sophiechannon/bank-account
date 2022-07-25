@@ -2,15 +2,14 @@ const Statement = require("./displayBankStatement");
 const BankAccount = require("./bankAccount");
 
 describe("print", () => {
-
   beforeAll(() => {
-    jest.spyOn(Date, 'now').mockImplementation(() => new Date('2022-07-23'));
+    jest.spyOn(Date, "now").mockImplementation(() => new Date("2022-07-23"));
   });
-  
+
   afterAll(() => {
     Date.now.mockRestore();
   });
-  
+
   it("just prints the header if there are no transactions", () => {
     const account = new BankAccount();
     const statement = new Statement(account.transactionHistory());
