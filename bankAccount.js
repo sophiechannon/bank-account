@@ -15,6 +15,9 @@ class BankAccount {
   }
 
   withdraw(amount) {
+    if (this.balance < amount) {
+      throw new Error("Transaction cancelled, your balance is £10.");
+    }
     this.balance -= amount;
     this.history.push({
       date: new Date(Date.now()),

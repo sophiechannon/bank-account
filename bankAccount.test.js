@@ -34,3 +34,14 @@ describe("transactionHisotory", () => {
     ]);
   });
 });
+
+describe("withdraw", () => {
+  it("Throws an error if client tries to deposit more than is currently in their account", () => {
+    const account = new BankAccount();
+    const date = new Date();
+    account.deposit(10);
+    expect(() => {
+      account.withdraw(20);
+    }).toThrow("Transaction cancelled, your balance is £10.")
+  });
+});
