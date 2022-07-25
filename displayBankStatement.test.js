@@ -1,4 +1,5 @@
 const Statement = require("./displayBankStatement");
+const formatPence = require('./formatPence')
 
 describe("print", () => {
   it("just prints the header if there are no transactions", () => {

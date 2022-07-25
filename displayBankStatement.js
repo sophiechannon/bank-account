@@ -1,3 +1,5 @@
+const formatPence = require('./formatPence')
+
 class DisplayBankStatement {
   constructor(transactions) {
     this.transactions = transactions;
@@ -16,14 +18,14 @@ class DisplayBankStatement {
         .concat(`\n${this._formatDate(transaction.date)}`)
         .concat(this._formatMoney(transaction.credit))
         .concat(this._formatMoney(transaction.debit))
-        .concat(`${this._formatPence(transaction.balance)}`);
+        .concat(`${formatPence(transaction.balance)}`);
     });
     return list;
   }
 
   _formatMoney(amount) {
     if (amount != null) {
-      return `${this._formatPence(amount)} || `;
+      return `${formatPence(amount)} || `;
     } else {
       return "|| ";
     }
@@ -31,16 +33,6 @@ class DisplayBankStatement {
 
   _formatDate(date) {
     return `${date.toLocaleString().split(",")[0]} || `;
-  }
-
-  _formatPence(amount) {
-    if (Number.isInteger(amount)) {
-      return `${amount}.00`;
-    } else if (amount.toString().split(".")[1].length === 1) {
-      return `${amount}0`;
-    } else {
-      return `${amount.toFixed(2)}`;
-    }
   }
 }
 
