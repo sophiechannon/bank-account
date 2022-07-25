@@ -38,7 +38,7 @@ npm run tests
 
 ![CRC cards](./documents/CRC%20cards%20-%20bank%20account%20tech%20test.png?raw=true "Model mapping")
 
-I decided to work with two classes to handle this problem. A BankAccount class that handles the account management from a known balance (withdrawing and depositing), and a separate class to handle the formatting when printing a bank statement. I did consider a third class to handle the transactions separately from the bank account, but felt that it made more sense to stay within the domain of the bank account as a basic function of it.
+I decided to work with two classes to handle this problem. A BankAccount class that handles the account management from a known balance (withdrawing and depositing), and a separate class to handle the formatting when printing a bank statement (displayBankStatement). I did consider a third class to handle the transactions separately from the bank account, but felt that it made more sense to stay within the domain of the bank account as a basic function of it. I passed the BankAccount class to the displayBankStatement class, because there could be many accounts, but they would all need printing the same way.
 
 | inputs | outputs |
 |--------|---------|
@@ -48,8 +48,13 @@ I decided to work with two classes to handle this problem. A BankAccount class t
 | deposit(1000), on 01/01/2022 > withdraw(5000), on 01/01/2022 | `Header > 01/01/2022 || || 1000.00 || 1000.00 > 01/01/2022 || 500.00 || || 500.00` |
 
 ## Questions to employer
+
 - What happens if the client goes overdrawn? Will the transaction be rejected, or will they be allowed to go overdrawn?
-I would implement this by running a check that the withdrawral amount was not greater than the positive amount in the account. If it was, the transaction would not be saved to the log and the client would receive a message telling them that the transaction was cancelled.
+
+I decided to go ahead an implement a check that returns an error and cancels the transaction if the account will be overdrawn
+
 - Does the client have an overdraft?
-If so, I would follow a similar process as the step ahead, but with the overdraft amount as the lower limit. I would also set up a notification to inform the customer that their account had entered the overdraft.
+
+I would implement this by running a check that the withdrawral amount was not greater than the positive amount in the account minus the overdraft amount. If it was, the transaction would not be saved to the log and the client would receive a message telling them that the transaction was cancelled. I would also set up a notification to inform the customer that their account had entered the overdraft.
+
 
