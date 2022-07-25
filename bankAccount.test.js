@@ -47,11 +47,36 @@ describe("transactionHisotory", () => {
 });
 
 describe("withdraw", () => {
-  it("Throws an error if client tries to deposit more than is currently in their account", () => {
+  it("Throws an error if client tries to withdraw more than is currently in their account", () => {
     const account = new BankAccount();
     account.deposit(10);
     expect(() => {
       account.withdraw(20);
     }).toThrow("Transaction cancelled, your balance is £10.");
+  });
+
+  it("throws an error if account goes overdrawn and prevents transaction", () => {
+    const account = new BankAccount();
+    account.deposit(1000);
+    expect(() => {
+      account.withdraw(2000);
+    }).toThrow("Transaction cancelled, your balance is £1000.");
+  });
+
+  it("throws an error if account goes overdrawn and prevents transaction", () => {
+    const account = new BankAccount();
+    account.deposit(10.4)
+    expect(() => {
+      account.withdraw(0);
+    }).toThrow("Transaction cancelled, you must enter an amount to withdraw");
+  });
+});
+
+describe("deposit", () => {
+  it("throws an error if account goes overdrawn and prevents transaction", () => {
+    const account = new BankAccount();
+    expect(() => {
+      account.deposit(0);
+    }).toThrow("Transaction cancelled, you must enter an amount to deposit");
   });
 });
