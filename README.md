@@ -33,6 +33,18 @@ npm install
 npm run tests
 ````
 
+The program runs in node, for example:
+````node
+node
+const BankAccount = require('./bankAccount);
+const displayBankStatement = require('./displayBankStatement);
+const account = new BankAccount();
+const statement = new displayBankStatement(BankAccount);
+account.withdraw(1000);
+account.desposit(500);
+statement.print();
+````
+
 
 ## Planning
 
@@ -40,12 +52,8 @@ npm run tests
 
 I decided to work with two classes to handle this problem. A BankAccount class that handles the account management from a known balance (withdrawing and depositing), and a separate class to handle the formatting when printing a bank statement (displayBankStatement). I did consider a third class to handle the transactions separately from the bank account, but felt that it made more sense to stay within the domain of the bank account as a basic function of it. I passed the BankAccount class to the displayBankStatement class, because there could be many accounts, but they would all need printing the same way.
 
-| inputs | outputs |
-|--------|---------|
-| nothing | Just the header |
-| deposit(1000), on 01/01/2022 | "Header > 01/01/2022 || || 1000.00 || 1000.00" |
-| deposit(1000), on 01/01/2022 > deposit(1000), on 01/01/2022 | `Header > 01/01/2022 || || 1000.00 || 1000.00 > 01/01/2022 || || 1000.00 || 2000.00` |
-| deposit(1000), on 01/01/2022 > withdraw(5000), on 01/01/2022 | `Header > 01/01/2022 || || 1000.00 || 1000.00 > 01/01/2022 || 500.00 || || 500.00` |
+## Edge cases
+I decided not to test for some eventualities, such as the amount to be withdrawn / deposited being a string vs an integer. This is becasue if I implemented a front end or command line interface for this project, I would use a function to convert the incoming string to an integer/float. 
 
 ## Questions to employer
 

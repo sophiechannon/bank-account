@@ -7,6 +7,7 @@ describe("print", () => {
     const statement = new Statement(accountDouble.transactionHistory());
     expect(statement.print()).toEqual("date || credit || debit || balance");
   });
+  
   it("prints the header and a line of transactions", () => {
     const date = new Date("2022-07-23");
     const accountDouble = {
@@ -19,6 +20,7 @@ describe("print", () => {
       "date || credit || debit || balance\n23/07/2022 || || 1000.00 || 1000.00"
     );
   });
+
   it("prints the header and multiple lines of transactions", () => {
     const date = new Date("2022-07-23");
     const accountDouble = {
@@ -32,6 +34,7 @@ describe("print", () => {
       "date || credit || debit || balance\n23/07/2022 || || 1000.00 || 1000.00\n23/07/2022 || 500.00 || || 500.00"
     );
   });
+
   it("prints correctly when amounts aren't full pounds, but do end in 0", () => {
     const date = new Date("2022-07-23");
     const accountDouble = {
