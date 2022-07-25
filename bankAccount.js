@@ -7,11 +7,7 @@ class BankAccount {
   }
 
   deposit(amount) {
-    if (amount === 0) {
-      throw new Error(
-        "Transaction cancelled, you must enter an amount to deposit"
-      );
-    }
+    this._zeroAmountError(amount, "deposit");
     this.balance += amount;
     this.history.push({
       date: new Date(Date.now()),
@@ -22,16 +18,8 @@ class BankAccount {
   }
 
   withdraw(amount) {
-    if (this.balance < amount) {
-      throw new Error(
-        `Transaction cancelled, your balance is £${formatPence(this.balance)}.`
-      );
-    }
-    if (amount === 0) {
-      throw new Error(
-        "Transaction cancelled, you must enter an amount to withdraw"
-      );
-    }
+    this._overdrawnError(amount)
+    this._zeroAmountError(amount, "withdraw");
     this.balance -= amount;
     this.history.push({
       date: new Date(Date.now()),
@@ -43,6 +31,24 @@ class BankAccount {
 
   transactionHistory() {
     return this.history;
+  }
+
+  // private methods
+
+  _zeroAmountError(amount, transactionType) {
+    if (amount === 0) {
+      throw new Error(
+        `Transaction cancelled, you must enter an amount to ${transactionType}`
+      );
+    }
+  }
+
+  _overdrawnError(amount) {
+    if (this.balance < amount) {
+      throw new Error(
+        `Transaction cancelled, your balance is £${formatPence(this.balance)}.`
+      );
+    }
   }
 }
 
