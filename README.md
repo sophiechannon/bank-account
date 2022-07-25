@@ -1,14 +1,55 @@
 Bank account
 ============
 
+## Requirements
+- You should be able to interact with your code via a REPL like IRB or Node. (You don't need to implement a command line interface that takes input from STDIN.)
+- Deposits, withdrawal.
+- Account statement (date, amount, balance) printing.
+- Data can be kept in memory (it doesn't need to be stored to a database or anything).
+
+
+## Acceptance criteria
+- Given a client makes a deposit of 1000 on 10-01-2023
+- And a deposit of 2000 on 13-01-2023
+- And a withdrawal of 500 on 14-01-2023
+- When she prints her bank statement, then she would see:
+
+````console
+date || credit || debit || balance
+14/01/2023 || || 500.00 || 2500.00
+13/01/2023 || 2000.00 || || 3000.00
+10/01/2023 || 1000.00 || || 1000.00
+````
+
+
+## How to use this program
+
+Linting (ESList) and tests (Jest) have both been configured to run through NPM.
+
+````console
+npm use node
+npm init -y
+npm install
+npm run tests
+````
+
+
+## Planning
+
+![CRC cards](./documents/CRC%20cards%20-%20bank%20account%20tech%20test.png?raw=true "Model mapping")
+
+I decided to work with two classes to handle this problem. A BankAccount class that handles the account management from a known balance (withdrawing and depositing), and a separate class to handle the formatting when printing a bank statement. I did consider a third class to handle the transactions separately from the bank account, but felt that it made more sense to stay within the domain of the bank account as a basic function of it.
+
 | inputs | outputs |
 |--------|---------|
 | nothing | Just the header |
-| deposit(1000), on 01/01/2022 | `Header > 01/01/2022 || || 1000.00 || 1000.00` |
+| deposit(1000), on 01/01/2022 | "Header > 01/01/2022 || || 1000.00 || 1000.00" |
 | deposit(1000), on 01/01/2022 > deposit(1000), on 01/01/2022 | `Header > 01/01/2022 || || 1000.00 || 1000.00 > 01/01/2022 || || 1000.00 || 2000.00` |
 | deposit(1000), on 01/01/2022 > withdraw(5000), on 01/01/2022 | `Header > 01/01/2022 || || 1000.00 || 1000.00 > 01/01/2022 || 500.00 || || 500.00` |
 
+## Questions to employer
+- What happens if the client goes overdrawn? Will the transaction be rejected, or will they be allowed to go overdrawn?
+I would implement this by running a check that the withdrawral amount was not greater than the positive amount in the account. If it was, the transaction would not be saved to the log and the client would receive a message telling them that the transaction was cancelled.
+- Does the client have an overdraft?
+If so, I would follow a similar process as the step ahead, but with the overdraft amount as the lower limit. I would also set up a notification to inform the customer that their account had entered the overdraft.
 
-Edge cases:
-- amounts deposited / withdrawn do not end in .00
-- Can account go overdrawn?
