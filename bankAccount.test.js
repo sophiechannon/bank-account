@@ -57,10 +57,10 @@ describe("withdraw", () => {
 
   it("throws an error if account goes overdrawn and prevents transaction", () => {
     const account = new BankAccount();
-    account.deposit(1000);
+    account.deposit(1000.5);
     expect(() => {
       account.withdraw(2000);
-    }).toThrow("Transaction cancelled, your balance is £1000.");
+    }).toThrow("Transaction cancelled, your balance is £1000.50");
   });
 
   it("throws an error if account goes overdrawn and prevents transaction", () => {

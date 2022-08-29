@@ -1,5 +1,3 @@
-const formatPence = require("./formatPence");
-
 class BankAccount {
   constructor() {
     this.balance = 0;
@@ -7,7 +5,7 @@ class BankAccount {
   }
 
   deposit(amount) {
-    this._zeroAmountError(amount, "deposit");
+    this.#zeroAmountError(amount, "deposit");
     this.balance += amount;
     this.history.push({
       date: new Date(Date.now()),
@@ -18,8 +16,8 @@ class BankAccount {
   }
 
   withdraw(amount) {
-    this._overdrawnError(amount)
-    this._zeroAmountError(amount, "withdraw");
+    this.#overdrawnError(amount)
+    this.#zeroAmountError(amount, "withdraw");
     this.balance -= amount;
     this.history.push({
       date: new Date(Date.now()),
@@ -35,7 +33,7 @@ class BankAccount {
 
   // private methods
 
-  _zeroAmountError(amount, transactionType) {
+  #zeroAmountError(amount, transactionType) {
     if (amount === 0) {
       throw new Error(
         `Transaction cancelled, you must enter an amount to ${transactionType}`
@@ -43,10 +41,10 @@ class BankAccount {
     }
   }
 
-  _overdrawnError(amount) {
+  #overdrawnError(amount) {
     if (this.balance < amount) {
       throw new Error(
-        `Transaction cancelled, your balance is £${formatPence(this.balance)}.`
+        `Transaction cancelled, your balance is £${this.balance.toFixed(2)}.`
       );
     }
   }

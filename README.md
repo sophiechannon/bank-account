@@ -27,11 +27,9 @@ date || credit || debit || balance
 Linting (ESList) and tests (Jest) have both been configured to run through NPM.
 
 ````console
-npx use node
+nvm use node
 npm init -y
 npm install
-npm run tests
-jest --coverage
 ````
 
 The program runs in node, for example:

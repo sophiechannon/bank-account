@@ -1,4 +1,4 @@
-const Statement = require("./displayBankStatement");
+const Statement = require("./bankStatement");
 const BankAccount = require("./bankAccount");
 
 describe("print", () => {
