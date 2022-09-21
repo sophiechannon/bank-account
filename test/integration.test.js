@@ -1,5 +1,5 @@
-const Statement = require("./bankStatement");
-const BankAccount = require("./bankAccount");
+const Statement = require("../src/bankStatement");
+const BankAccount = require("../src/bankAccount");
 
 describe("print", () => {
   beforeAll(() => {

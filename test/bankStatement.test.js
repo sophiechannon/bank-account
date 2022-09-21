@@ -1,4 +1,4 @@
-const Statement = require("./bankStatement");
+const Statement = require("../src/bankStatement");
 
 describe("print", () => {
   it("just prints the header if there are no transactions", () => {
